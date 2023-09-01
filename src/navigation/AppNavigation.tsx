@@ -20,6 +20,7 @@ export default function AppNavigation() {
         screenOptions={{
           headerShown: false,
           animation: 'slide_from_right',
+          orientation: 'portrait',
         }}>
         <Stack.Screen name="PokemonListScreen" component={PokemonListScreen} />
         <Stack.Screen
