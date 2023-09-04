@@ -16,7 +16,6 @@
     "@react-navigation/bottom-tabs": "^6.5.8",
     "@react-navigation/native": "^6.1.7",
     "@react-navigation/native-stack": "^6.9.13",
-    "@sanar/react-native-highlight-text": "^1.0.2",
     "@tanstack/query-async-storage-persister": "^4.33.0",
     "@tanstack/react-query": "^4.33.0",
     "@tanstack/react-query-persist-client": "^4.33.0",
@@ -31,6 +30,7 @@
     "react-native-safe-area-context": "^4.7.1",
     "react-native-screens": "^3.25.0",
     "react-native-splash-screen": "^3.3.0",
+    "react-native-svg": "^13.13.0",
     "reactotron-react-native": "^5.0.3",
     "rn-placeholder": "^3.0.3"
   },

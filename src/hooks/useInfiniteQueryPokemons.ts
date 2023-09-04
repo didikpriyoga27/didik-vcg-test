@@ -17,10 +17,7 @@ function _fetch(params?: Params): FetchConfig {
   return {
     method: 'GET',
     url: '/pokemon',
-    params: {
-      limit: params?.limit,
-      offset: params?.offset,
-    },
+    params,
   };
 }
 

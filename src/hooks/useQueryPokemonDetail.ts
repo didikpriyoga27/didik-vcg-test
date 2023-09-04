@@ -7,6 +7,7 @@ type Params = {
 
 type Pokemon = {
   id: number;
+  name: string;
   abilities: {ability: {name: string}; is_hidden: boolean}[];
   sprites: {
     other: {
@@ -24,6 +25,7 @@ type Pokemon = {
 export default function useQueryPokemonDetail(params: Params) {
   const fetch = useFetch<Params, Pokemon>(() => ({
     url: `/pokemon/${params.pokemonName}`,
+    method: 'GET',
   }));
   return useQuery(['pokemon_detail', params], () => {
     if (params?.pokemonName) {
