@@ -1,6 +1,7 @@
 import React, {FC} from 'react';
-import {useWindowDimensions} from 'react-native';
-import View from '../View';
+import {Pressable, useWindowDimensions} from 'react-native';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
+import {StackParamList} from '../../navigation/types';
 import Text from '../Text';
 import useQueryPokemonDetail from '../../hooks/useQueryPokemonDetail';
 import FastImage from 'react-native-fast-image';
@@ -21,13 +22,15 @@ const PokemonItem: FC<Props> = ({item, index}) => {
   const {width} = useWindowDimensions();
   const {name} = item;
   const {data} = useQueryPokemonDetail({pokemonName: name});
+  const {navigate} = useNavigation<NavigationProp<StackParamList>>();
 
   const backgroundType: any = data?.types?.[0].type?.name ?? 'normal';
 
   const backgrounds = useBackgroundByTypes();
 
   return (
-    <View
+    <Pressable
+      onPress={() => navigate('PokemonDetailScreen', {pokemonName: name})}
       className={`flex-1 mb-2 items-center space-y-4 ${
         index % 2 === 0 ? 'ml-2 mr-1' : 'ml-1 mr-2'
       }`}>
@@ -50,7 +53,7 @@ const PokemonItem: FC<Props> = ({item, index}) => {
         />
         <Text className="text-center text-white text-xl my-2">{name}</Text>
       </LinearGradient>
-    </View>
+    </Pressable>
   );
 };
 

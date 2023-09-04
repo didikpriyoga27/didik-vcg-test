@@ -82,7 +82,9 @@ const PokemonListScreen = () => {
       return (
         <View className="space-y-4 p-4 items-center justify-center">
           <EmptyPokemonSvg />
-          <Text>There is no pokemon named "{params.search}"</Text>
+          <Text className="text-black">
+            There is no pokemon named "{params.search}"
+          </Text>
         </View>
       );
     }
@@ -96,7 +98,7 @@ const PokemonListScreen = () => {
 
   return (
     <BaseLayout>
-      <Text className="text-center pt-4 text-2xl font-poppins_700">
+      <Text className="text-black text-center pt-4 text-2xl font-poppins_700">
         Pokemons
       </Text>
       <View className="flex-row items-center p-2">

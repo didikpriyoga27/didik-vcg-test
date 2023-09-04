@@ -1,4 +1,6 @@
 export type StackParamList = {
   PokemonListScreen: undefined;
-  PokemonDetailScreen: undefined;
+  PokemonDetailScreen: {
+    pokemonName: string;
+  };
 };

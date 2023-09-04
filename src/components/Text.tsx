@@ -4,7 +4,7 @@ import {Text as RNText, TextProps} from 'react-native';
 const Text: FC<TextProps> = ({className, ...props}) => {
   return (
     <RNText
-      className={`text-black text-sm font-poppins_400 ${className}`}
+      className={`text-white text-sm font-poppins_400 ${className}`}
       {...props}
     />
   );
