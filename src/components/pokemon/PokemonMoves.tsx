@@ -11,7 +11,7 @@ const PokemonMoves: FC<Props> = ({moves}) => {
     return null;
   }
   return (
-    <View>
+    <View className="space-y-2">
       <Text>Moves:</Text>
       <View className={'flex-row flex-wrap items-center space-y-2'}>
         {moves?.splice(0, 10)?.map(move => {

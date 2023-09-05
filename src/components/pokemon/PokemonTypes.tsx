@@ -11,7 +11,7 @@ const PokemonTypes: FC<Props> = ({types}) => {
     return null;
   }
   return (
-    <View className="mt-2">
+    <View className="mt-2 space-y-2">
       <Text>Types:</Text>
       <View className={'flex-row flex-wrap items-center space-y-2'}>
         {types?.map(type => {

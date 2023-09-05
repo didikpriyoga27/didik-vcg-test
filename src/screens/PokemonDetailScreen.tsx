@@ -55,7 +55,7 @@ const PokemonDetailScreen = () => {
             style={{
               width: width - 12,
               height: width - 12,
-              marginTop: 40,
+              marginTop: 60,
             }}
             resizeMode="contain"
           />
@@ -85,7 +85,7 @@ const PokemonDetailScreen = () => {
                 );
               })}
             </ScrollView>
-            <View className="m-4 space-y-2">
+            <View className="m-4 space-y-2 pb-20">
               <Text>
                 Height:{' '}
                 <Text className={'font-poppins_700'}>{data?.height}</Text>
