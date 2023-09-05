@@ -77,3 +77,15 @@ To learn more about React Native, take a look at the following resources:
 - [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
 - [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
 - [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+
+# Screenshots
+![Simulator Screenshot - iPhone 14 - 2023-09-05 at 11 57 21](https://github.com/didikpriyoga27/didik-vcg-test/assets/105910924/4905c1a5-6e8e-4f65-8453-18c00bfbaa23)
+![Simulator Screenshot - iPhone 14 - 2023-09-05 at 11 57 34](https://github.com/didikpriyoga27/didik-vcg-test/assets/105910924/4a996e01-ed72-4531-8cd7-b00e3e53ff86)
+![Simulator Screenshot - iPhone 14 - 2023-09-05 at 11 57 46](https://github.com/didikpriyoga27/didik-vcg-test/assets/105910924/8d29477a-4903-4beb-87b6-3d5ba89b6e25)
+![simulator_screenshot_F59A17FF-6C29-4A90-A4E3-FEF2C98B0956](https://github.com/didikpriyoga27/didik-vcg-test/assets/105910924/9d27b163-b530-4d5d-ac0d-1f02e0528c00)
+![simulator_screenshot_10AE328F-4AB7-4DB0-B455-F0F76DC2D5E1](https://github.com/didikpriyoga27/didik-vcg-test/assets/105910924/c8499f5f-22e3-40e6-a2b2-febdfba9a932)![simulator_screenshot_23654655-9523-425B-A550-E4BC1EC8521C](https://github.com/didikpriyoga27/didik-vcg-test/assets/105910924/a33832b8-43bd-4c11-ae32-b0cf2a3cd417)
+![simulator_screenshot_15D698C9-269A-4DAB-B3CB-ED1958A4BAE5](https://github.com/didikpriyoga27/didik-vcg-test/assets/105910924/0bb83b3f-7067-4a0f-8c2d-576b50442944)
+
+
+
+
