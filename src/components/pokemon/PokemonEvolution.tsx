@@ -8,7 +8,7 @@ import useQueryPokemonSpecies from '../../hooks/useQueryPokemonSpecies';
 import useQueryPokemonEvolution from '../../hooks/useQueryPokemonEvolution';
 
 type Props = {
-  speciesUrl: string;
+  speciesUrl?: string;
 };
 
 export default function PokemonEvolution({speciesUrl}: Props) {
@@ -24,7 +24,7 @@ export default function PokemonEvolution({speciesUrl}: Props) {
 
   const isLoading = isLoadingPokemonSpecies || isLoadingEvolutionChain;
 
-  if (isLoading) {
+  if (isLoading || !speciesUrl) {
     return null;
   }
 

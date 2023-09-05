@@ -23,6 +23,11 @@ type Pokemon = {
       'official-artwork': {front_default: string; front_shiny: string};
     };
   };
+  moves: {
+    move: {
+      name: string;
+    };
+  }[];
   weight: number;
   height: number;
   types: {type: {name: string}}[];

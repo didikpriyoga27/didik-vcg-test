@@ -11,6 +11,8 @@ import Text from '../components/Text';
 import View from '../components/View';
 import Header from '../components/Header';
 import PokemonEvolution from '../components/pokemon/PokemonEvolution';
+import PokemonTypes from '../components/pokemon/PokemonTypes';
+import PokemonMoves from '../components/pokemon/PokemonMoves';
 
 const PokemonDetailScreen = () => {
   const {width} = useWindowDimensions();
@@ -92,22 +94,9 @@ const PokemonDetailScreen = () => {
                 Weight:{' '}
                 <Text className={'font-poppins_500'}>{data?.weight}</Text>
               </Text>
-              <Text>Types:</Text>
-              <View
-                className={
-                  'flex-row flex-wrap items-center space-x-2 space-y-2'
-                }>
-                {data?.types?.map(type => {
-                  return (
-                    <View className="px-3 py-2 bg-white rounded">
-                      <Text className="text-black">{type?.type?.name}</Text>
-                    </View>
-                  );
-                })}
-              </View>
-              {!!data?.species?.url && (
-                <PokemonEvolution speciesUrl={data?.species?.url} />
-              )}
+              <PokemonTypes types={data?.types} />
+              <PokemonEvolution speciesUrl={data?.species?.url} />
+              <PokemonMoves moves={data?.moves} />
             </View>
           </View>
         </ScrollView>
