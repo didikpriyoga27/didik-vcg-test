@@ -9,6 +9,8 @@ import colors from '../utils/colors';
 import FastImage from 'react-native-fast-image';
 import Text from '../components/Text';
 import View from '../components/View';
+import Header from '../components/Header';
+import PokemonEvolution from '../components/pokemon/PokemonEvolution';
 
 const PokemonDetailScreen = () => {
   const {width} = useWindowDimensions();
@@ -25,7 +27,12 @@ const PokemonDetailScreen = () => {
   const back_default = data?.sprites?.back_default;
   const back_shiny = data?.sprites?.back_shiny;
 
-  const spritesUri = [front_default, front_shiny, back_default, back_shiny];
+  const spritesUri = [
+    {text: 'Front \nDefault', uri: front_default},
+    {text: 'Back \nDefault', uri: back_default},
+    {text: 'Front \nShiny', uri: front_shiny},
+    {text: 'Back \nShiny', uri: back_shiny},
+  ];
 
   return (
     <View className="flex-1">
@@ -38,52 +45,72 @@ const PokemonDetailScreen = () => {
             colors['dark-grey']['gradient-2'],
           ]
         }>
-        <FastImage
-          source={{uri: data?.sprites?.other?.home?.front_default}}
-          tw={'rounded-lg self-center'}
-          style={{
-            width: width - 12,
-            height: width - 12,
-          }}
-          resizeMode="contain"
-        />
-        <Text className="text-center text-white text-xl my-2 font-poppins_700">
-          {pokemonName}
-        </Text>
-        <View className={'space-y-2'}>
-          <Text className="mx-4">Sprites</Text>
-          <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            className="flex-row">
-            {spritesUri.map((uri, index) => {
-              return (
-                <View>
-                  <FastImage
-                    source={{uri}}
-                    style={{
-                      width: width / 3 - 24,
-                      height: width / 3 - 24,
-                      backgroundColor: 'white',
-                      borderRadius: 8,
-                      marginLeft: index ? 0 : 16,
-                      marginRight: 16,
-                    }}
-                  />
-                  <Text></Text>
-                </View>
-              );
-            })}
-          </ScrollView>
-          <View className="m-4 space-y-2">
-            <Text>
-              Height: <Text className={'font-poppins_700'}>{data?.height}</Text>
-            </Text>
-            <Text>
-              Weight: <Text className={'font-poppins_500'}>{data?.weight}</Text>
-            </Text>
+        <Header title={'Pokemon Detail'} />
+        <ScrollView>
+          <FastImage
+            source={{uri: data?.sprites?.other?.home?.front_default}}
+            tw={'rounded-lg self-center'}
+            style={{
+              width: width - 12,
+              height: width - 12,
+              marginTop: 40,
+            }}
+            resizeMode="contain"
+          />
+          <Text className="text-center text-white text-xl my-2 font-poppins_700">
+            {pokemonName}
+          </Text>
+          <View className={'space-y-2'}>
+            <Text className="mx-4">Sprites:</Text>
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              className="flex-row">
+              {spritesUri.map((sprites, index) => {
+                return (
+                  <View className={`${index ? 'ml-0' : 'ml-4'} mr-4 space-y-1`}>
+                    <FastImage
+                      source={{uri: sprites.uri}}
+                      style={{
+                        width: width / 3 - 48,
+                        height: width / 3 - 48,
+                        backgroundColor: 'white',
+                        borderRadius: 8,
+                      }}
+                    />
+                    <Text className="text-center text-xs">{sprites.text}</Text>
+                  </View>
+                );
+              })}
+            </ScrollView>
+            <View className="m-4 space-y-2">
+              <Text>
+                Height:{' '}
+                <Text className={'font-poppins_700'}>{data?.height}</Text>
+              </Text>
+              <Text>
+                Weight:{' '}
+                <Text className={'font-poppins_500'}>{data?.weight}</Text>
+              </Text>
+              <Text>Types:</Text>
+              <View
+                className={
+                  'flex-row flex-wrap items-center space-x-2 space-y-2'
+                }>
+                {data?.types?.map(type => {
+                  return (
+                    <View className="px-3 py-2 bg-white rounded">
+                      <Text className="text-black">{type?.type?.name}</Text>
+                    </View>
+                  );
+                })}
+              </View>
+              {!!data?.species?.url && (
+                <PokemonEvolution speciesUrl={data?.species?.url} />
+              )}
+            </View>
           </View>
-        </View>
+        </ScrollView>
       </LinearGradient>
     </View>
   );

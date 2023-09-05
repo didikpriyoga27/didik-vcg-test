@@ -9,6 +9,9 @@ type Pokemon = {
   id: number;
   name: string;
   abilities: {ability: {name: string}; is_hidden: boolean}[];
+  species: {
+    url: string;
+  };
   sprites: {
     back_default: string;
     back_shiny: string;
