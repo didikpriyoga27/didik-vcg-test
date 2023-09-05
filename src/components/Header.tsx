@@ -8,11 +8,11 @@ import View from './View';
 import BackButtonSvg from '../assets/svg/BackButtonSvg';
 
 type Props = {
-  title: string;
+  title?: string;
 };
 
 const Header: FC<Props> = ({...props}) => {
-  const {title} = props;
+  const {title = ''} = props;
   const {top} = useSafeAreaInsets();
   const {goBack} = useNavigation<NavigationProp<StackParamList>>();
 

@@ -8,3 +8,6 @@
 #   http://developer.android.com/guide/developing/tools/proguard.html
 
 # Add any project specific keep options here:
+
+# React Native Config
+-keep class com.didikvcgtest.BuildConfig { *; }

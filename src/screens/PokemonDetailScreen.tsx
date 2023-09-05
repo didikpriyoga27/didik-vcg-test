@@ -1,5 +1,10 @@
 import React from 'react';
-import {ScrollView, StatusBar, useWindowDimensions} from 'react-native';
+import {
+  Platform,
+  ScrollView,
+  StatusBar,
+  useWindowDimensions,
+} from 'react-native';
 import {RouteProp, useRoute} from '@react-navigation/native';
 import {StackParamList} from '../navigation/types';
 import useQueryPokemonDetail from '../hooks/useQueryPokemonDetail';
@@ -38,7 +43,12 @@ const PokemonDetailScreen = () => {
 
   return (
     <View className="flex-1">
-      <StatusBar barStyle={'light-content'} />
+      <StatusBar
+        barStyle={Platform.select({
+          android: 'dark-content',
+          ios: 'light-content',
+        })}
+      />
       <LinearGradient
         style={{borderRadius: 4, flex: 1}}
         colors={
@@ -47,7 +57,7 @@ const PokemonDetailScreen = () => {
             colors['dark-grey']['gradient-2'],
           ]
         }>
-        <Header title={'Pokemon Detail'} />
+        <Header />
         <ScrollView>
           <FastImage
             source={{uri: data?.sprites?.other?.home?.front_default}}

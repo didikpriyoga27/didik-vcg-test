@@ -1,4 +1,4 @@
-import React, {LegacyRef, useEffect, useRef} from 'react';
+import React, {LegacyRef, Suspense, useEffect, useRef} from 'react';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import {persistQueryClient} from '@tanstack/react-query-persist-client';
@@ -45,11 +45,13 @@ export default function AppContainer() {
   return (
     <SafeAreaProvider>
       <QueryClientProvider client={queryClient}>
-        <RecoilRoot>
-          <StatusBar barStyle={'dark-content'} backgroundColor={'white'} />
-          <FlashMessage position="top" ref={flashMessageRef.current} />
-          <AppNavigation />
-        </RecoilRoot>
+        <Suspense>
+          <RecoilRoot>
+            <StatusBar barStyle={'dark-content'} backgroundColor={'white'} />
+            <FlashMessage position="top" ref={flashMessageRef.current} />
+            <AppNavigation />
+          </RecoilRoot>
+        </Suspense>
       </QueryClientProvider>
     </SafeAreaProvider>
   );
