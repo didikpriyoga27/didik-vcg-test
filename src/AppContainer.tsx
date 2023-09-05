@@ -1,9 +1,10 @@
-import React, {LegacyRef, Suspense, useEffect, useRef} from 'react';
+import React, {LegacyRef, useEffect, useRef} from 'react';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import {persistQueryClient} from '@tanstack/react-query-persist-client';
 import {createAsyncStoragePersister} from '@tanstack/query-async-storage-persister';
 import {StatusBar} from 'react-native';
+import {RecoilRoot} from 'recoil';
 import AppNavigation from './navigation/AppNavigation';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import FlashMessage from 'react-native-flash-message';
@@ -44,11 +45,11 @@ export default function AppContainer() {
   return (
     <SafeAreaProvider>
       <QueryClientProvider client={queryClient}>
-        <Suspense>
+        <RecoilRoot>
           <StatusBar barStyle={'dark-content'} backgroundColor={'white'} />
           <FlashMessage position="top" ref={flashMessageRef.current} />
           <AppNavigation />
-        </Suspense>
+        </RecoilRoot>
       </QueryClientProvider>
     </SafeAreaProvider>
   );

@@ -1,5 +1,5 @@
-import React, {useCallback, useMemo, useReducer} from 'react';
-import {FlatList} from 'react-native';
+import React, {useCallback, useMemo, useReducer, useState} from 'react';
+import {FlatList, Pressable} from 'react-native';
 import {Fade, Placeholder} from 'rn-placeholder';
 import BaseLayout from '../components/BaseLayout';
 import Text from '../components/Text';
@@ -10,8 +10,13 @@ import SearchInput from '../components/SearchInput';
 import View from '../components/View';
 import useQueryPokemonDetail from '../hooks/useQueryPokemonDetail';
 import EmptyPokemonSvg from '../assets/svg/EmptyPokemonSvg';
+import FavFilledSvg from '../assets/svg/FavFilledSvg';
+import FavOutlinedSvg from '../assets/svg/FavOutlinedSvg';
+import useFavoritePokemon from '../hooks/useFavoritePokemon';
 
 const PokemonListScreen = () => {
+  const [isShowFavorite, setIsShowFavorite] = useState(false);
+
   const [params, dispatch] = useReducer(
     //@ts-ignore
     (oldState, newState) => ({
@@ -22,6 +27,13 @@ const PokemonListScreen = () => {
       search: '',
     },
   );
+
+  const onPress = useCallback(() => {
+    dispatch({search: ''});
+    setIsShowFavorite(!isShowFavorite);
+  }, [isShowFavorite]);
+
+  const {favoritePokemon} = useFavoritePokemon();
 
   const {
     data: pokemonData,
@@ -37,13 +49,25 @@ const PokemonListScreen = () => {
     });
 
   const data = useMemo(() => {
+    if (isShowFavorite) {
+      if (favoritePokemon?.length && favoritePokemon?.length % 2 !== 0) {
+        return [...favoritePokemon, null];
+      }
+      return favoritePokemon;
+    }
     if (params.search) {
       return pokemonDetailData
         ? [{name: pokemonDetailData?.name, url: ''}, null]
         : [];
     }
     return pokemonData?.pages.flatMap(p => p?.data?.results ?? []) ?? [];
-  }, [params.search, pokemonData?.pages, pokemonDetailData]);
+  }, [
+    favoritePokemon,
+    isShowFavorite,
+    params.search,
+    pokemonData?.pages,
+    pokemonDetailData,
+  ]);
 
   const renderItem = useCallback(
     ({item, index}: {item: PokemonItemProps | null; index: number}) => {
@@ -68,15 +92,25 @@ const PokemonListScreen = () => {
   }, []);
 
   const ListFooterComponent = useCallback(() => {
-    if (isFetchingNextPage && !params.search) {
+    if (isFetchingNextPage && !params.search && !isShowFavorite) {
       return renderPlaceholder();
     }
     return null;
-  }, [isFetchingNextPage, params.search, renderPlaceholder]);
+  }, [isFetchingNextPage, isShowFavorite, params.search, renderPlaceholder]);
 
   const ListEmptyComponent = useCallback(() => {
     if (isLoadingDetail) {
       return renderPlaceholder();
+    }
+    if (isShowFavorite) {
+      return (
+        <View className="space-y-4 p-4 items-center justify-center">
+          <EmptyPokemonSvg />
+          <Text className="text-black">
+            You haven't added your favorite Pokemon yet
+          </Text>
+        </View>
+      );
     }
     if (params.search) {
       return (
@@ -88,7 +122,7 @@ const PokemonListScreen = () => {
         </View>
       );
     }
-  }, [isLoadingDetail, params.search, renderPlaceholder]);
+  }, [isLoadingDetail, isShowFavorite, params.search, renderPlaceholder]);
 
   const onEndReached = useCallback(() => {
     if (!isFetchingNextPage && hasNextPage && !params.search) {
@@ -98,13 +132,23 @@ const PokemonListScreen = () => {
 
   return (
     <BaseLayout>
-      <Text className="text-black text-center pt-4 text-2xl font-poppins_700">
-        Pokemons
-      </Text>
+      <View className="items-center">
+        <Text className="text-black text-center pt-4 text-2xl font-poppins_700">
+          Pokemons
+        </Text>
+        <Pressable
+          {...{onPress}}
+          className="absolute right-4 top-2 bottom-0 justify-center">
+          {isShowFavorite ? <FavFilledSvg /> : <FavOutlinedSvg />}
+        </Pressable>
+      </View>
       <View className="flex-row items-center p-2">
         <SearchInput
           placeholder="Search Pokemon"
-          onChangeText={text => dispatch({search: text})}
+          onChangeText={text => {
+            dispatch({search: text});
+            setIsShowFavorite(false);
+          }}
           defaultValue={params.search}
         />
       </View>

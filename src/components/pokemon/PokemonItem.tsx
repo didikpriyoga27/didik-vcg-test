@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, useCallback} from 'react';
 import {Pressable, useWindowDimensions} from 'react-native';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {StackParamList} from '../../navigation/types';
@@ -8,9 +8,13 @@ import FastImage from 'react-native-fast-image';
 import LinearGradient from 'react-native-linear-gradient';
 import colors from '../../utils/colors';
 import useBackgroundByTypes from '../../hooks/useBackgroundByTypes';
+import useFavoritePokemon from '../../hooks/useFavoritePokemon';
+import FavFilledSvg from '../../assets/svg/FavFilledSvg';
+import FavOutlinedSvg from '../../assets/svg/FavOutlinedSvg';
 
 export type PokemonItemProps = {
   name: string;
+  url: string;
 };
 
 type Props = {
@@ -27,6 +31,17 @@ const PokemonItem: FC<Props> = ({item, index}) => {
   const backgroundType: any = data?.types?.[0].type?.name ?? 'normal';
 
   const backgrounds = useBackgroundByTypes();
+
+  const {favoritePokemon, addPokemon, removePokemon} = useFavoritePokemon();
+
+  const isFavorite = favoritePokemon.some(pokemon => pokemon.name === name);
+
+  const onFavPress = useCallback(() => {
+    if (isFavorite) {
+      return removePokemon(name);
+    }
+    return addPokemon({name, url: item?.url});
+  }, [addPokemon, isFavorite, item?.url, name, removePokemon]);
 
   return (
     <Pressable
@@ -52,6 +67,13 @@ const PokemonItem: FC<Props> = ({item, index}) => {
           resizeMode="contain"
         />
         <Text className="text-center text-white text-xl my-2">{name}</Text>
+        <Pressable onPress={onFavPress} className="absolute top-2 left-2">
+          {isFavorite ? (
+            <FavFilledSvg />
+          ) : (
+            <FavOutlinedSvg fill={colors.grey['gradient-2']} />
+          )}
+        </Pressable>
       </LinearGradient>
     </Pressable>
   );

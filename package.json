@@ -32,6 +32,7 @@
     "react-native-splash-screen": "^3.3.0",
     "react-native-svg": "^13.13.0",
     "reactotron-react-native": "^5.0.3",
+    "recoil": "^0.7.7",
     "rn-placeholder": "^3.0.3"
   },
   "devDependencies": {
